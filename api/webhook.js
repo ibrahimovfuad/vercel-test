@@ -1,3 +1,5 @@
+"use strict"
+
 function encodeFormData(data) {
     return Object.keys(data)
         .map(key => {
