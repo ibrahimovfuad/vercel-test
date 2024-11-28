@@ -1,5 +1,3 @@
-"use strict"
-
 function encodeFormData(data) {
     return Object.keys(data)
         .map(key => {
@@ -17,7 +15,7 @@ function encodeFormData(data) {
         .join('&');
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     if (req.method === 'POST') {
         const body = req.body;
 
@@ -28,8 +26,8 @@ export default async function handler(req, res) {
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Token': '10524rjbW0MY9xAYrhBkx1wIrMzxe43nb0ZLRzeu48IKTxx9KRG8h8fZ0St3Lxzu',
-            'Cabinet-Hash': '99a805bc0d0845bf489b9b09ad69ea30'
+            'Token': '10524rjbW0MY9xAYrhBkx1wIrMzxe43nb0ZLRzeu48IKTxx9KRG8h8fZ0St3Lxzu', // Замените 'token' на ваш реальный токен
+            'Cabinet-Hash': '99a805bc0d0845bf489b9b09ad69ea30' // Замените 'hash' на ваш реальный хэш
         };
 
         const data = {
@@ -47,23 +45,22 @@ export default async function handler(req, res) {
         };
 
         try {
-            console.log(1234t)
-            // const response = await fetch('https://api.kwiga.com/contacts', {
-            //     method: 'POST',
-            //     headers: headers,
-            //     body: encodeFormData(data)
-            // });
+            const response = await fetch('https://api.kwiga.com/contacts', {
+                method: 'POST',
+                headers: headers,
+                body: encodeFormData(data)
+            });
 
-            // if (!response.ok) {
-            //     const errorDetails = await response.text();
-            //     console.error('API Error:', errorDetails);
-            //     return res.status(response.status).json({ message: 'Failed to process data', details: errorDetails });
-            // }
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                console.error('API Error:', errorDetails);
+                return res.status(response.status).json({ message: 'Failed to process data', details: errorDetails });
+            }
 
-            // const result = await response.json();
-            // console.log(result);
+            const result = await response.json();
+            console.log(result);
 
-            // return res.status(200).json({ message: 'Data received and processed' });
+            return res.status(200).json({ message: 'Data received and processed', result });
         } catch (error) {
             console.error('Fetch Error:', error);
             return res.status(500).json({ message: 'Internal Server Error', error: error.message });
@@ -71,4 +68,4 @@ export default async function handler(req, res) {
     } else {
         return res.status(405).json({ message: 'Method Not Allowed' });
     }
-}
+};
