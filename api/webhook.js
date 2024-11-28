@@ -1,20 +1,3 @@
-function encodeFormData(data) {
-    return Object.keys(data)
-        .map(key => {
-            const value = data[key];
-            if (Array.isArray(value)) {
-                return value
-                    .map(item => `${encodeURIComponent(key)}[]=${encodeURIComponent(item)}`)
-                    .join('&');
-            } else if (typeof value === 'object' && value !== null) {
-                return `${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(value))}`;
-            } else {
-                return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-            }
-        })
-        .join('&');
-}
-
 module.exports = async function handler(req, res) {
     if (req.method === 'POST') {
         const body = req.body;
@@ -42,12 +25,12 @@ module.exports = async function handler(req, res) {
                 }
             ] : []
         };
-
+        
         try {
             const response = await fetch('https://api.kwiga.com/contacts', {
                 method: 'POST',
                 headers: headers,
-                body: encodeFormData(data)
+                body: JSON.stringify(data)
             });
 
             if (!response.ok) {
