@@ -5,7 +5,11 @@ module.exports = async function handler(req, res) {
         // Разделение имени и фамилии
         const firstName = body.Input?.split(' ')[0] || '';
         const lastName = body.Input?.split(' ')[1] || '';
-
+        
+        if (!body.Input) {
+            return res.status(200).json({ message: 'No data received' });
+        }
+        
         const headers = {
             'Content-Type': 'application/json',
             'Token': '10524rjbW0MY9xAYrhBkx1wIrMzxe43nb0ZLRzeu48IKTxx9KRG8h8fZ0St3Lxzu', // Замените 'token' на ваш реальный токен
