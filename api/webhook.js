@@ -24,8 +24,7 @@ module.exports = async function handler(req, res) {
         const lastName = body.Input?.split(' ')[1] || '';
 
         const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
             'Token': '10524rjbW0MY9xAYrhBkx1wIrMzxe43nb0ZLRzeu48IKTxx9KRG8h8fZ0St3Lxzu', // Замените 'token' на ваш реальный токен
             'Cabinet-Hash': '99a805bc0d0845bf489b9b09ad69ea30' // Замените 'hash' на ваш реальный хэш
         };
