@@ -45,22 +45,23 @@ export default async function handler(req, res) {
         };
 
         try {
-            const response = await fetch('https://api.kwiga.com/contacts', {
-                method: 'POST',
-                headers: headers,
-                body: encodeFormData(data)
-            });
+            console.log(1234t)
+            // const response = await fetch('https://api.kwiga.com/contacts', {
+            //     method: 'POST',
+            //     headers: headers,
+            //     body: encodeFormData(data)
+            // });
 
-            if (!response.ok) {
-                const errorDetails = await response.text();
-                console.error('API Error:', errorDetails);
-                return res.status(response.status).json({ message: 'Failed to process data', details: errorDetails });
-            }
+            // if (!response.ok) {
+            //     const errorDetails = await response.text();
+            //     console.error('API Error:', errorDetails);
+            //     return res.status(response.status).json({ message: 'Failed to process data', details: errorDetails });
+            // }
 
-            const result = await response.json();
-            console.log(result);
+            // const result = await response.json();
+            // console.log(result);
 
-            return res.status(200).json({ message: 'Data received and processed' });
+            // return res.status(200).json({ message: 'Data received and processed' });
         } catch (error) {
             console.error('Fetch Error:', error);
             return res.status(500).json({ message: 'Internal Server Error', error: error.message });
