@@ -25,7 +25,7 @@ module.exports = async function handler(req, res) {
                 }
             ] : []
         };
-        
+        console.log(data);
         try {
             const response = await fetch('https://api.kwiga.com/contacts', {
                 method: 'POST',
